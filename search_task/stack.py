@@ -4,6 +4,7 @@ class Stack:
     def __init__(self, data):
         self.stack = list()
         self.stack.append(data)
+        
     #Adding elements to stack
     def push(self,data):
         self.stack.append(data)

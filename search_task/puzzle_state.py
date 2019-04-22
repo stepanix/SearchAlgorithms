@@ -30,12 +30,12 @@ class PuzzleState:
                 return True
              
         return False
- 
              
     def __get_next_movable_element(self, config):
         return min(config)
  
     def expand(self, config):
+        self.node_count += 1
         board_elements = []
         for n, i in enumerate(config):
             if n != i:
@@ -57,7 +57,6 @@ class PuzzleState:
                     if not self.__node_already_generated(tuple(up_config_child)):
                         self.generatedNode.add(tuple(up_config_child))
                         frontierList.append((tuple(up_config_child)))
-                        self.node_count  = self.node_count + 1
                   
                 if n != 6 and n != 7 and n != 8:
                     down_config_child = list(config_tuple)
@@ -67,7 +66,6 @@ class PuzzleState:
                     if not self.__node_already_generated(tuple(down_config_child)):
                         self.generatedNode.add(tuple(down_config_child))
                         frontierList.append((tuple(down_config_child)))
-                        self.node_count  = self.node_count + 1
                      
                 if n != 0 and n != 3 and n != 6:
                     left_config_child = list(config_tuple)
@@ -77,7 +75,6 @@ class PuzzleState:
                     if not self.__node_already_generated(tuple(left_config_child)):
                         self.generatedNode.add(tuple(left_config_child))
                         frontierList.append((tuple(left_config_child)))
-                        self.node_count  = self.node_count + 1
                  
                 if n != 2 and n != 5 and n != 8:
                     right_config_child = list(config_tuple)
@@ -87,7 +84,6 @@ class PuzzleState:
                     if not self.__node_already_generated(tuple(right_config_child)):
                         self.generatedNode.add(tuple(right_config_child))
                         frontierList.append((tuple(right_config_child)))
-                        self.node_count  = self.node_count + 1
      
         if len(frontierList) > 0:
             parent = str(config_list).replace("[","(").replace("]",")")
@@ -111,21 +107,24 @@ class PuzzleState:
         return position + 3
      
     def get_cost(self):
-        print(self.cost)
+        return self.cost
+    
+    def get_nodes_expanded(self):
+        return self.node_count
             
-    def get_goal_path(self):
-        for n, i in enumerate(self.parent_children):
-                print(i, ":", self.parent_children.get(i))
-                if self.get_goal_parent(self.parent_children.get(i)) == "found":
-                    print(i, self.parent_children.get(i))
-                    return
-     
-    def get_goal_parent(self, children):
-        goalNode = 0,1,2,3,4,5,6,7,8
-        for n, i in enumerate(children):
-            if i == goalNode:
-                return "found"
-        return "not found"
+#     def get_goal_path(self):
+#         for n, i in enumerate(self.parent_children):
+#                 print(i, ":", self.parent_children.get(i))
+#                 if self.get_goal_parent(self.parent_children.get(i)) == "found":
+#                     print(i, self.parent_children.get(i))
+#                     return
+#      
+#     def get_goal_parent(self, children):
+#         goalNode = 0,1,2,3,4,5,6,7,8
+#         for n, i in enumerate(children):
+#             if i == goalNode:
+#                 return "found"
+#         return "not found"
             
             
             
