@@ -18,7 +18,7 @@ def bfs(initState):
             
         if node == goalState:
             print('nodes_expanded:', puzzle.get_nodes_expanded())
-            print('explored:', explored)
+            print('explored nodes:', explored)
             print('parent children:', puzzle.parent_children)
             return "SUCCESS"
 
