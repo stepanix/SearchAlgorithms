@@ -3,13 +3,12 @@ from _collections import deque
 from search_task.stack import Stack
 import heapq
 
-n = 3
-initialState = 1,4,2,6,5,8,7,3,0
+initialState = 1,2,5,3,4,0,6,7,8
 goalState = 0,1,2,3,4,5,6,7,8
 
 def bfs(initState):
     
-    puzzle = PuzzleState(initState, n)
+    puzzle = PuzzleState(initState)
     frontier = deque([initState])
     explored = []
     
@@ -32,7 +31,7 @@ def bfs(initState):
     return "FAILED"
 
 def dfs(initState):
-    puzzle = PuzzleState(initState, n)
+    puzzle = PuzzleState(initState)
     frontier = Stack(initState)
     explored = []
 
@@ -48,7 +47,8 @@ def dfs(initState):
             return "SUCCESS"
         
         puzzle.expand(node)
-        print('nodes_expanded:', puzzle.get_nodes_expanded())
+#         print('explored nodes:', explored)
+#         print('nodes_expanded:', puzzle.get_nodes_expanded())
         
         for generated_node in puzzle.get_generated_node():
             if generated_node not in frontier.elements() and generated_node not in explored:
@@ -58,7 +58,7 @@ def dfs(initState):
     return "FAILED"
 
 def ast(initState):
-    puzzle = PuzzleState(initState, n)
+    puzzle = PuzzleState(initState)
     frontier = [];
     heapq.heapify(frontier)
     heapq.heappush(frontier, initState)
