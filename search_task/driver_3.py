@@ -1,6 +1,5 @@
 from search_task.puzzle_state import PuzzleState
 from _collections import deque
-from search_task.stack import Stack
 import heapq
 
 initialState = 1,2,5,3,4,0,6,7,8
@@ -32,12 +31,12 @@ def bfs(initState):
 
 def dfs(initState):
     puzzle = PuzzleState(initState)
-    frontier = Stack(initState)
+    frontier = deque([initState])
     explored = []
 
     while frontier:
         node = frontier.pop()
-#         print('frontier pop', node)
+        print('frontier pop', node)
         explored.append(node)
 
         if node == goalState:
@@ -47,14 +46,14 @@ def dfs(initState):
             return "SUCCESS"
         
         puzzle.expand(node)
-#         print('explored nodes:', explored)
-#         print('nodes_expanded:', puzzle.get_nodes_expanded())
         
         for generated_node in puzzle.get_generated_node():
-            if generated_node not in frontier.elements() and generated_node not in explored:
-                frontier.push(generated_node)
-#                 print('frontier push', generated_node)
-          
+            if generated_node not in frontier and generated_node not in explored:
+                frontier.append(generated_node)
+                print('frontier push', generated_node)
+                
+#         frontier.reverse()
+        
     return "FAILED"
 
 def ast(initState):
@@ -85,7 +84,7 @@ def ast(initState):
                
     return "FAILED"
 
-print(bfs(initialState))
+print(dfs(initialState))
 
 
     
