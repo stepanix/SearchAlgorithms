@@ -1,5 +1,3 @@
-from ast import literal_eval
-
 
 class puzzle_state:
     
@@ -41,6 +39,7 @@ class puzzle_state:
     
     def expand(self, config):
         self.node_count += 1
+        self.generatedNode.clear()
         self.generate_child_nodes(config)
         
     def _can_move_up(self, index, blank_element):
@@ -65,49 +64,47 @@ class puzzle_state:
                 up_config_child = list(config_tuple)
                 target_up_position = self.__move_up(index)
                 up_config_child[index], up_config_child[target_up_position] = up_config_child[target_up_position], up_config_child[index]
-                 
-                if not self.__node_already_generated(tuple(up_config_child)):
-                    self.generatedNode.append(tuple(up_config_child))
-                    frontierList.append((tuple(up_config_child)))
-                    self.current_move.append('up')
+                self.generatedNode.append(tuple(up_config_child))
+                frontierList.append((tuple(up_config_child)))
+                self.current_move.append('up')
+#                 if not self.__node_already_generated(tuple(up_config_child)):
+                
               
             if self._can_move_down(index, element):
                 down_config_child = list(config_tuple)
                 target_down_position = self.__move_down(index)
                 down_config_child[index], down_config_child[target_down_position] = down_config_child[target_down_position], down_config_child[index]
-                 
-                if not self.__node_already_generated(tuple(down_config_child)):
-                    self.generatedNode.append(tuple(down_config_child))
-                    frontierList.append((tuple(down_config_child)))
-                    self.current_move.append('down')
+                self.generatedNode.append(tuple(down_config_child))
+                frontierList.append((tuple(down_config_child)))
+                self.current_move.append('down')
+#                 if not self.__node_already_generated(tuple(down_config_child)):
                  
             if self._can_move_left(index, element):
                 left_config_child = list(config_tuple)
                 target_left_position = self.__move_left(index)
                 left_config_child[index], left_config_child[target_left_position] = left_config_child[target_left_position], left_config_child[index]
-                
-                if not self.__node_already_generated(tuple(left_config_child)):
-                    self.generatedNode.append(tuple(left_config_child))
-                    frontierList.append((tuple(left_config_child)))
-                    self.current_move.append('left')
+                self.generatedNode.append(tuple(left_config_child))
+                frontierList.append((tuple(left_config_child)))
+                self.current_move.append('left')
+#                 if not self.__node_already_generated(tuple(left_config_child)):
              
             if self._can_move_right(index, element):
                 right_config_child = list(config_tuple)
                 target_right_position = self.__move_right(index)
                 right_config_child[index], right_config_child[target_right_position] = right_config_child[target_right_position], right_config_child[index]
-                 
-                if not self.__node_already_generated(tuple(right_config_child)):
-                    self.generatedNode.append(tuple(right_config_child))
-                    frontierList.append((tuple(right_config_child)))
-                    self.current_move.append('right')
+                self.generatedNode.append(tuple(right_config_child))
+                frontierList.append((tuple(right_config_child)))
+                self.current_move.append('right')
+#                 if not self.__node_already_generated(tuple(right_config_child)):
+                
      
-        if len(frontierList) > 0:
-            parent = str(config_list).replace("[","(").replace("]",")")
-            parent = literal_eval(parent)
-            child = str(frontierList)
-            child = literal_eval(child)
-            self.parent_children.update({parent: child})
-            frontierList.clear()
+#         if len(frontierList) > 0:
+#             parent = str(config_list).replace("[","(").replace("]",")")
+#             parent = literal_eval(parent)
+#             child = str(frontierList)
+#             child = literal_eval(child)
+#             self.parent_children.update({parent: child})
+#             frontierList.clear()
          
     def __move_left(self, position):
         return position - 1
