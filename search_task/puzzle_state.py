@@ -21,6 +21,11 @@ class PuzzleState:
     def get_generated_node(self):
         return self.generatedNode
     
+    def get_reverse_generated_node(self):
+        rev = self.generatedNode
+        rev.reverse()
+        return rev
+    
     def get_moves(self):
         return self.current_move
      

@@ -36,7 +36,7 @@ def dfs(initState):
 
     while frontier:
         node = frontier.pop()
-        print('frontier pop', node)
+#         print('frontier pop', node)
         explored.append(node)
 
         if node == goalState:
@@ -46,19 +46,18 @@ def dfs(initState):
             return "SUCCESS"
         
         puzzle.expand(node)
+        print('nodes_expanded:', puzzle.get_nodes_expanded())
         
-        for generated_node in puzzle.get_generated_node():
+        for generated_node in puzzle.get_reverse_generated_node():
             if generated_node not in frontier and generated_node not in explored:
                 frontier.append(generated_node)
-                print('frontier push', generated_node)
-                
-#         frontier.reverse()
+
         
     return "FAILED"
 
 def ast(initState):
     puzzle = PuzzleState(initState)
-    frontier = [];
+    frontier = []
     heapq.heapify(frontier)
     heapq.heappush(frontier, initState)
     explored = set()
