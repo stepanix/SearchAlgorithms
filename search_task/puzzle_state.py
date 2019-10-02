@@ -67,8 +67,6 @@ class puzzle_state:
                 self.generatedNode.append(tuple(up_config_child))
                 frontierList.append((tuple(up_config_child)))
                 self.current_move.append('up')
-#                 if not self.__node_already_generated(tuple(up_config_child)):
-                
               
             if self._can_move_down(index, element):
                 down_config_child = list(config_tuple)
@@ -77,7 +75,6 @@ class puzzle_state:
                 self.generatedNode.append(tuple(down_config_child))
                 frontierList.append((tuple(down_config_child)))
                 self.current_move.append('down')
-#                 if not self.__node_already_generated(tuple(down_config_child)):
                  
             if self._can_move_left(index, element):
                 left_config_child = list(config_tuple)
@@ -86,7 +83,6 @@ class puzzle_state:
                 self.generatedNode.append(tuple(left_config_child))
                 frontierList.append((tuple(left_config_child)))
                 self.current_move.append('left')
-#                 if not self.__node_already_generated(tuple(left_config_child)):
              
             if self._can_move_right(index, element):
                 right_config_child = list(config_tuple)
@@ -95,8 +91,6 @@ class puzzle_state:
                 self.generatedNode.append(tuple(right_config_child))
                 frontierList.append((tuple(right_config_child)))
                 self.current_move.append('right')
-#                 if not self.__node_already_generated(tuple(right_config_child)):
-                
      
 #         if len(frontierList) > 0:
 #             parent = str(config_list).replace("[","(").replace("]",")")

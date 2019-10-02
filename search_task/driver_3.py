@@ -2,7 +2,7 @@ from search_task.puzzle_state import puzzle_state
 from _collections import deque
 import heapq
 
-initialState = 8,6,4,2,1,3,5,7,0
+initialState = 6,1,8,4,0,2,7,3,5
 goalState = 0,1,2,3,4,5,6,7,8
 
 def bfs(initState):
@@ -38,7 +38,6 @@ def dfs(initState):
     
     while frontier:
         node = frontier.pop()
-#         print('frontier pop', node)
         explored.add(node)
 # 
         if node == goalState:
