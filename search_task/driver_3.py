@@ -1,4 +1,4 @@
-from search_task.puzzle_state import PuzzleState
+from search_task.puzzle_state import puzzle_state
 from _collections import deque
 import heapq
 
@@ -7,13 +7,15 @@ goalState = 0,1,2,3,4,5,6,7,8
 
 def bfs(initState):
     
-    puzzle = PuzzleState(initState)
+    puzzle = puzzle_state(initState)
     frontier = deque([initState])
-    explored = []
+    frontier_set = set()
+    explored = set()
     
     while frontier:
+        frontier_set = frontier
         node = frontier.pop()
-        explored.append(node)
+        explored.add(node)
             
         if node == goalState:
             print('nodes_expanded:', puzzle.get_nodes_expanded())
@@ -24,20 +26,24 @@ def bfs(initState):
         puzzle.expand(node)
                
         for generated_node in puzzle.get_generated_node():
-            if generated_node not in frontier and generated_node not in explored:
+            if generated_node in frontier_set or generated_node in explored:
+                continue
+            else:
                 frontier.appendleft(generated_node)
- 
+            
     return "FAILED"
 
 def dfs(initState):
-    puzzle = PuzzleState(initState)
+    puzzle = puzzle_state(initState)
     frontier = deque([initState])
-    explored = []
+    frontier_set = set()
+    explored = set()
 
     while frontier:
+        frontier_set = frontier
         node = frontier.pop()
 #         print('frontier pop', node)
-        explored.append(node)
+        explored.add(node)
 
         if node == goalState:
             print('nodes_expanded:', puzzle.get_nodes_expanded())
@@ -49,14 +55,15 @@ def dfs(initState):
         print('nodes_expanded:', puzzle.get_nodes_expanded())
         
         for generated_node in puzzle.get_reverse_generated_node():
-            if generated_node not in frontier and generated_node not in explored:
+            if generated_node in frontier_set or generated_node in explored:
+                continue
+            else:
                 frontier.append(generated_node)
-
         
     return "FAILED"
 
 def ast(initState):
-    puzzle = PuzzleState(initState)
+    puzzle = puzzle_state(initState)
     frontier = []
     heapq.heapify(frontier)
     heapq.heappush(frontier, initState)

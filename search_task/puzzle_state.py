@@ -1,7 +1,7 @@
 from ast import literal_eval
 
 
-class PuzzleState:
+class puzzle_state:
     
     generatedNode = []
     current_move = []
@@ -126,7 +126,7 @@ class PuzzleState:
     
     def get_nodes_expanded(self):
         return self.node_count
-            
+    
             
             
             
